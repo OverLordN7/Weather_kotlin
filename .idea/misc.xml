@@ -3,8 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android_Projects/Weather_kotlin/app/src/main/res/font/.xml" value="0.23796296296296296" />
         <entry key="..\:/Android_Projects/Weather_kotlin/app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="..\:/Android_Projects/Weather_kotlin/app/src/main/res/layout/fragment_main.xml" value="0.25" />
+        <entry key="..\:/Android_Projects/Weather_kotlin/app/src/main/res/layout/fragment_days.xml" value="0.17806484295845998" />
+        <entry key="..\:/Android_Projects/Weather_kotlin/app/src/main/res/layout/fragment_hours.xml" value="0.17806484295845998" />
+        <entry key="..\:/Android_Projects/Weather_kotlin/app/src/main/res/layout/fragment_main.xml" value="0.33" />
       </map>
     </option>
   </component>
