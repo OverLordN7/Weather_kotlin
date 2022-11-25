@@ -12,7 +12,7 @@ import com.example.weather_kotlin.databinding.ActivityMainBinding
 import org.json.JSONObject
 
 private const val TAG = "MainActivity"
-private const val API_KEY = "483a0d3a56ca43d883261050221811"
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -30,24 +30,5 @@ class MainActivity : AppCompatActivity() {
                 .add(R.id.fragment_container,fragment)
                 .commit()
         }
-    }
-
-    private fun getResult(name: String){
-        val url = "https://api.weatherapi.com/v1/current.json" +
-                "?key=$API_KEY&q=$name&aqi=no"
-
-        val queue = Volley.newRequestQueue(this)
-        val stringRequest = StringRequest(Request.Method.GET,
-            url,
-            {response->
-                val obj = JSONObject(response)
-                val temp = obj.getJSONObject("current")
-                Log.d(TAG,"Response: ${temp.getString("temp_c")}")
-            },
-            {
-                Log.d(TAG,"Volley error: $it")
-            }
-        )
-        queue.add(stringRequest)
     }
 }
