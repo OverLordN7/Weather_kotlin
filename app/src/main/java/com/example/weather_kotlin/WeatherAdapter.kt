@@ -7,14 +7,25 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weather_kotlin.databinding.ListItemBinding
+import com.squareup.picasso.Picasso
 
-class WeatherAdapter: ListAdapter<WeatherModel,WeatherAdapter.Holder>(Comparator()) {
-    class Holder(view: View): RecyclerView.ViewHolder(view){
+class WeatherAdapter(val listener: Listener?): ListAdapter<WeatherModel,WeatherAdapter.Holder>(Comparator()) {
+    class Holder(view: View,val listener: Listener?): RecyclerView.ViewHolder(view){
         val binding = ListItemBinding.bind(view)
+        var itemTemp:WeatherModel? = null
+
+        init {
+            itemView.setOnClickListener{
+                itemTemp?.let { it1 -> listener?.onClick(it1) }
+            }
+        }
+
         fun bind(item: WeatherModel) =  with(binding) {
+            itemTemp = item
             textViewDate.text = item.time
             textViewCondition.text = item.condition
-            textViewTemp.text = item.currentTemp
+            textViewTemp.text = item.currentTemp.ifEmpty{"${item.maxTemp}°C/${item.minTemp}°C"}
+            Picasso.get().load("https:"+item.imageUrl).into(imageViewImage)
         }
     }
 
@@ -35,11 +46,15 @@ class WeatherAdapter: ListAdapter<WeatherModel,WeatherAdapter.Holder>(Comparator
                 parent,
                 false)
 
-        return Holder(view)
+        return Holder(view,listener)
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
         holder.bind(getItem(position))
+    }
+
+    interface Listener{
+        fun onClick(item: WeatherModel)
     }
 
 
